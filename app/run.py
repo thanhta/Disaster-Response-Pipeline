@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
+from plotly.graph_objs import Bar, Histogram
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('DisasterResponse', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -39,12 +39,19 @@ model = joblib.load("../models/your_model_name.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # Count of Message group by 'genre'
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    # Count of Message group by 'earthquake'
+    earthquake_counts = df.groupby('earthquake').count()['message']
+    earthquake_names = ['No Earthquake related messages', 'Earthquake related messages']
+    
+    # Total count of each message category
+    categories = df.columns[4:].tolist()
+    messages = df.iloc[:,4:].sum().tolist()
+    
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
@@ -63,7 +70,47 @@ def index():
                     'title': "Genre"
                 }
             }
-        }
+        },
+        
+        {
+            'data': [
+                Bar(
+                    x=earthquake_names,
+                    y=earthquake_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message earthquake',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Earthquake"
+                }
+            }
+        }, 
+        
+        {
+            'data': [
+                 Histogram(
+                    x=categories,
+                    y=messages,
+                    histfunc = 'sum'
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Total count of each message group by categories',
+                'yaxis': {
+                    'title': "Total count of Categories of Messages"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
+        } 
+            
     ]
     
     # encode plotly graphs in JSON
@@ -93,7 +140,7 @@ def go():
 
 
 def main():
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    app.run(host='0.0.0.0', port=3000, debug=True)
 
 
 if __name__ == '__main__':
