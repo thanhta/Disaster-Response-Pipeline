@@ -18,10 +18,13 @@ In addition to default sets of libraries installed by the Anaconda distribution 
 
 This is the repo of building a Disaster Response Pipeline project for the Udacity Data Scientist Nanodegree.
 For this project, we build a web and backend applications which consist of:
-    - **A web application** is built using the Flask framework. This is where an emergency worker can input a message and get classification results in several categories. There are 36 different categories related to disaster response. The web application will also display visualizations of the three different data sets.
-    - **A backend application** which consist of: 
-        1. **an ETL pipeline** which will pre-process and cleanse the raw messages provided by **Figure Eight**. These message data are loaded  into the SQLlite Database after cleansing 
-        2. **a text processing and machine learning pipeline** is built with natural language toolkits (nltk) and ML pipeline. Then, the model is trained and tuned using GridSearchCV.     
+
+1. **A web application** is built using the Flask framework. This is where an emergency worker can input a message and get classification results in several categories. There are 36 different categories related to disaster response. The web application will also display visualizations of the three different data sets
+
+
+2. **A backend application** which consist of: 
+        - **an ETL pipeline** which will pre-process and cleanse the raw messages provided by **Figure Eight**. These message data are loaded  into the SQLlite Database after cleansing 
+        - **a text processing and machine learning pipeline** is built with natural language toolkits (nltk) and ML pipeline. Then, the model is trained and tuned using GridSearchCV.     
 
 ## File Descriptions <a name="files"></a>
 
