@@ -11,9 +11,9 @@ A web and backend application where an emergency worker can input a message and 
 5. [Disaster Response Project Web Application](#web)
 6. [Licensing, Authors, and Acknowledgements](#licensing)
 
-## Installation <a name="installation"></a>
+## Installation <a name="installation"></a>`    `
 
-In addition to default sets of libraries installed by the Anaconda distribution of Python 3.7 (which are needed for this application: NumPy, Pandas and Scikit-learn, regex, sqlalchemy, flask, plotly), the application also requires these libraries to be installed: pickle, nltk. 
+In addition to default sets of libraries installed by the Anaconda distribution of Python 3.7 (which are needed for this application: NumPy, Pandas, Scikit-learn, regex, sqlalchemy, flask and plotly), the application also requires these libraries to be installed: pickle, nltk. 
 
 ## Project Description<a name="description"></a>
 
@@ -29,11 +29,44 @@ For this project, we build a web and backend application which consists of:
 
 
 - **a text processing and machine learning pipeline** is built with natural language toolkits (nltk) and ML pipeline. Then, the model is trained and tuned using GridSearchCV.
-        - 
-   
-
+        
 
 ## File Descriptions <a name="files"></a>
+
+1. At the **top level folder (Disaster-Response-Pipeline)**, there are:
+
+
+- **README.md** file (which provides the detailed information on how to build and run this project), four png files are used to embed the web application image and other three visual plots's images into the README.md file.
+
+
+- **ETL Pipeline Preparation.ipynb** is an IPython notebook which is used to create, explore and test the ETL pipeline. Then, this IPython notebook is transferred to **process_data.py** in the data folder. This IPython notebook does not require to build the final application.
+
+
+- **ML Pipeline Preparation.ipynb** is an IPython notebook which is used to build, explore and evaluate ML models and the ML pipelines. It uses GridSearch to find the optimum model. Then, this code is transferred to **train_classifier.py** in the model folder. This IPython notebook does not require to build the final application.
+
+
+2. **App subfolder** includes 
+
+
+- **templates folder** which includes: **master.html** (home page of the web app) and **go.html** (output page of the web app which shows classification results associated with the input message)
+
+
+- **run.py** is the web application built on top of Flask framework. This framework is used to link the query from the frontend to the backend ML model. The output of the classification prediction from the ML model are displayed using plotly. Plotly is also used to display the visualizations of the three different data sets 
+
+
+3. **Data subfolder** includes
+
+
+- **disaster_messages.csv** (are disaster response's raw messages ) **disaster_categories.csv** (are disaster response's categories messages)
+
+
+- **DisasterResponse.db** is the database which store the messages after pre-processed and cleansed. 
+
+
+- **process_data.py** is the python code which merged 2 datasets from the raw messages into the Data Frames. It converts the categories of disaster messages into 36 individual category columns and drop duplicate messages and it then stores these cleansed messages into SQLite Database.
+
+
+4. **Model subfolder** includes **train_classifier.py**. This python code loads the messages from the SQLlite Database. It builds ML pipeline to train the ML model for classifying the disaster messages using these cleansed message data. It uses Gridsearch to find the optimum model. One of the ML pipeline component applying natural language toolkits to split text messages into words, convert the words to lowercase and return the root form of the words before converting these words into feature sets.
 
 
 ## Instructions <a name="instructions"></a>
@@ -54,6 +87,11 @@ For this project, we build a web and backend application which consists of:
 ## Disaster Response Project Web Application screenshot<a name="web"></a>
 ![ Web Application](Web-App-Screenshot.png)
 
+![Plot-one](Plot-one-Screenshot.png)
+
+![Plot-two](Plot-two-Screenshot.png)
+
+![Plot-three](Plot-three-Screenshot.png)
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
-Must give credit to **Figure Eight** for providing the labeled messages datasets. The message datasets are also included in this repository as two csv files: disaster_categories.csv and disaster_messages.csv  Otherwise, feel free to use the code here as you would like!
+Must give credit to **Figure Eight** for providing the labeled messages datasets. The message datasets are also included in this repository as two csv files: disaster_categories.csv and disaster_messages.csv. Please feel free to use the code here as you would like!
