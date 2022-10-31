@@ -51,22 +51,22 @@ For this project, we build a web and backend application which consists of:
 - **templates folder** which includes: **master.html** (home page of the web app) and **go.html** (output page of the web app which shows classification results associated with the input message)
 
 
-- **run.py** is the web application built on top of Flask framework. This framework is used to link the query from the frontend to the backend ML model. The output of the classification prediction from the ML model are displayed using plotly. Plotly is also used to display the visualizations of the three different data sets 
+- **run.py** is the web application built on top of Flask framework. This framework is used to link the query from the frontend to the backend ML model. The output of the classification predictions from the ML model are displayed using plotly. Plotly is also used to display the visualizations of the three different data sets 
 
 
 3. **Data subfolder** includes
 
 
-- **disaster_messages.csv** (are disaster response's raw messages ) **disaster_categories.csv** (are disaster response's categories messages)
+- **disaster_messages.csv** (are disaster response's raw messages ) and **disaster_categories.csv** (are disaster response's categories messages)
 
 
 - **DisasterResponse.db** is the database which store the messages after pre-processed and cleansed. 
 
 
-- **process_data.py** is the python code which merged 2 datasets from the raw messages into the Data Frames. It converts the categories of disaster messages into 36 individual category columns and drop duplicate messages and it then stores these cleansed messages into SQLite Database.
+- **process_data.py** is the python code which merged 2 datasets from the raw messages into the Data Frames. It converts the categories of disaster messages into 36 individual category columns. It drops duplicate messages and then stores these cleansed messages into SQLite Database.
 
 
-4. **Model subfolder** includes **train_classifier.py**. This python code loads the messages from the SQLlite Database. It builds ML pipeline to train the ML model for classifying the disaster messages using these cleansed message data. It uses Gridsearch to find the optimum model. One of the ML pipeline component applying natural language toolkits to split text messages into words, convert the words to lowercase and return the root form of the words before converting these words into feature sets.
+4. **Model subfolder** includes **train_classifier.py**. This python code loads the messages from the SQLlite Database. It builds ML pipeline to train the ML model for classifying the disaster messages using these cleansed message data. It uses Gridsearch to find the optimum model. One of the ML pipeline component applying natural language toolkit to split text messages into words, to convert the words to lowercase and then to return it to the root form of the words before converting these words into feature sets.
 
 
 ## Instructions <a name="instructions"></a>
@@ -84,7 +84,7 @@ For this project, we build a web and backend application which consists of:
 3. Go to http://0.0.0.0:3001/
 
 
-## Disaster Response Project Web Application screenshot<a name="web"></a>
+## Disaster Response Project Web Application screenshots<a name="web"></a>
 ![ Web Application](Web-App-Screenshot.png)
 
 ![Plot-one](Plot-one-Screenshot.png)
